@@ -52,7 +52,6 @@ td {
 
 main{
     min-height: 80%;
-    border: 5px solid green;
 }
 
 /* The Modal (background) */
@@ -82,6 +81,7 @@ main{
     border-radius: 35px;
     background-color: #fefefe;
     margin: 15% auto;
+    font-size: var(--MEDIUM-FS);
     /* 15% from the top and centered */
     padding: 20px;
     border: 5px solid #888;
@@ -127,6 +127,10 @@ main{
 
 .deleteButton{
     float:right;
+    border: none;
+    background-color: #ab0000;
+    border-radius: 5px;
+    height: 1.5rem;
 }
 
 .deleteButton:hover{
@@ -138,6 +142,7 @@ main{
     padding: 0.4rem;
     background-color: white;
     margin: 0 .8rem 0 .8rem;
+    height: 100px;
 }
 
 .medListDosage{

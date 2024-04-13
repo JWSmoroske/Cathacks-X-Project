@@ -33,16 +33,6 @@ function addItem() {
             "method": methodText
         }
         meds[itemText] = medication;
-        // const newListItem = document.createElement("li");
-        // newListItem.textContent = itemText;
-        // itemList.appendChild(newListItem);
-        // medicationInput.value = "";
-
-        // // Add a new option for the medication in the select element
-        // const newOption = document.createElement("option");
-        // newOption.text = itemText;
-        // newOption.value = itemText;
-        
         localStorage.setItem("medList",JSON.stringify(meds));
         update();
         modal.style.display = "none";
