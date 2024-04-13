@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --DARK-COLOR: #333;
+    --LIGHT-COLOR: #fff;
+    --FS: clamp(.75rem,2vw,2rem);
+    --MEDIUM-FS: clamp(.75rem, 2.5vw,2.5rem);
+    --GREATER-FS: clamp(1rem, 3.5vw, 3.2rem);
+}
+header{
+    top: 0;
+    background-color: var(--DARK-COLOR);
+    color: var(--LIGHT-COLOR);
+    position: sticky;
+    text-align:center;
+}
+body{
+    font: var(--FS);
+    min-height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+    background-color: var(--LIGHT-COLOR);
+    color: var(--DARK-COLOR);
+}
