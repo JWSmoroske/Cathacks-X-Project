@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="schedule.js" defer></script>
     <title>Schedule</title>
 </head>
 
@@ -24,22 +25,7 @@
     </header>
     <main>
         <div class="container">
-            <ol class="timeList">
-                <li> 
-                    <h3> 7:00 AM </h3>
-                    <ul class="instructionList">
-                        <li> Take Ibuprofen (1 pill @ 25mg) with water </li>
-                        <li> Take [Medication.name] ([Medication.quantity] @ [Medication.dosage]) [Medication.route] [Medication.method] </li>
-                    </ul> 
-
-                </li>
-                <li> 
-                    <h3> format([START_TIME + FREQUENCY]) </h3> 
-                    <ul class="instructionList">
-                        <li> Take Ibuprofen (1 pill @ 25mg) orally with water </li>
-                        <li> Take [Medication.name] ([Medication.quantity] @ [Medication.dosage]) [Medication.route] [Medication.method] </li>
-                    </ul> 
-                </li>
+            <ol class="timeList" id="timeList">
             </ol>
         </div>
     </main>
