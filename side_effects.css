@@ -48,4 +48,20 @@ td {
     box-sizing: border-box;
     overflow: hidden;
 }
+
+.container {
+    width: 100%;
+    height: auto;
+    padding: 5%;
+    font-size: 20px;
+}
+
+.effectTable {
+    font-family: 'Montserrat';
+    width: 100%;
+    border: 1px solid black;
+    text-align: center;
+    table-layout: fixed;
+    word-wrap: break-word;
+}
   
