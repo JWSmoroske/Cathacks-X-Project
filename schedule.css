@@ -27,6 +27,7 @@ body {
     flex-flow: column nowrap;
     background-color: var(--LIGHT-COLOR);
     color: var(--DARK-COLOR);
+    font-family: 'Montserrat';
 }
 
 .headTable {
@@ -48,4 +49,24 @@ td {
     box-sizing: border-box;
     overflow: hidden;
 }
-  
+
+.container {
+    width: 100%;
+    height: auto;
+    padding: 5%;
+    font-size: 20px;
+}
+
+.timeList {
+    list-style: none;
+}
+
+.instructionList {
+    margin-left: 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+ul.instructionList > li {
+    line-height: 1.5;
+}
