@@ -1,4 +1,10 @@
 let meds = {};
+const storedMeds = localStorage.getItem("medList");
+if (storedMeds) {
+    meds = JSON.parse(storedMeds);
+    update();
+}
+
 
 function addItem() {
     const medicationInput = document.getElementById("medicationInput");
@@ -48,6 +54,8 @@ function closeButton(){
 
 function update(){
     console.log(Object.keys(meds).length);
+    if(!localStorage.getItem("medList")) return;
+    meds = JSON.parse(localStorage.getItem("medList"));
     let listDiv = document.getElementById("listContainer");
     listDiv.innerHTML = "";
     for(const key in meds){
@@ -64,11 +72,16 @@ function update(){
         const newButton = document.createElement("button");
         newButton.classList.add("deleteButton");
         newButton.textContent = "Delete";
-        // newButton.onclick = deleteItem(name);
+        newButton.addEventListener("click", function(){
+            deleteItem(name);
+        });
         listDiv.appendChild(newListItem);
         listDiv.appendChild(newButton);
+        localStorage.setItem("medList", JSON.stringify(meds));
     }   
 }
+
+
 
 function deleteItem(name){
     delete meds[name];
