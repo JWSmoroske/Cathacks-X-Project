@@ -8,9 +8,9 @@
 :root {
     --DARK-COLOR: #333;
     --LIGHT-COLOR: #fff;
-    --FS: clamp(.85rem, 2vw, 2rem);
-    --MEDIUM-FS: clamp(.75rem, 2.5vw, 2.5rem);
-    --GREATER-FS: clamp(1rem, 3.5vw, 3.2rem);
+    --FS: clamp(.85rem, 2vw, 1rem);
+    --MEDIUM-FS: clamp(.75rem, 2.5vw, 1em);
+    --GREATER-FS: clamp(1rem, 3.5vw, 1rem);
 }
 
 header {
