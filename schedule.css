@@ -24,7 +24,9 @@ body {
     font: var(--FS);
     min-height: 100vh;
     display: flex;
-    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     background-color: var(--LIGHT-COLOR);
     color: var(--DARK-COLOR);
 }
@@ -48,4 +50,19 @@ td {
     box-sizing: border-box;
     overflow: hidden;
 }
-  
+
+#myModal {
+    position: absolute;
+    width: 80%;
+    transform: translate(-50%, -50%);
+    background-color: green;
+    border: 3px solid red;
+}
+
+input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+}

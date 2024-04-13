@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="homepage.css">
-    <script src="app.js"></script>
+    <script src="app.js" defer></script>
     <title>Home</title>
 </head>
 
@@ -21,15 +21,46 @@
         </table>
     </header>
     <main>
-        <div class = "container">
-            <h1>List of medications taking:</h1>
-            <input type="text" id="itemInput" placeholder="Enter item">
-            <button onclick="addItem('add')">Add Item</button>
-            <select id="medicationSelect">
-            </select>
-            <button id="removeItemButton" onclick="removeItem()">Remove Item</button>
-            <ul id="itemList">
-            </ul>
+        <button id="myBtn">Open Modal</button>
+        
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+            <!-- Modal content -->
+            <h1>Prescription Information</h1>
+
+            <form id="medication-form">
+                <label for="medicationInput">Medication Name:</label>
+                <input type="text" id="medicationInput" placeholder="Ibuprofen"><br>
+                
+                <label for="dosageInput">Dosage:</label>
+                <input type="text" id="dosageInput" placeholder="50mg"><br>
+
+                <label for="quantityInput">Quantity:</label>
+                <input type="text" id="quantityInput" placeholder="3"><br>
+                
+                <label for="frequencyInput">Frequency:</label>
+                <input type="text" id="frequencyInput" placeholder="2"><br>
+
+                <label for="startInput">Start Time:</label>
+                <input type="text" id="startInput" placeholder="8am"><br>
+                
+                <label for="endInput">End Time:</label>
+                <input type="text" id="endInput" placeholder="8pm"><br>
+                
+                <label for="methodInput">Method:</label>
+                <input type="text" id="methodInput" placeholder="oral"><br>
+
+                <button type="button" id="addItem('add')" onclick="addItem()" data-dismiss="modal">Add Medication</button>
+                <button onclick="closeButton()" type="button" class="close-button" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+            </form>
+        <br>
+        </div>
+        <h2>Medication List:</h2>
+        <div id="listContainer" onload="update()">
+
         </div>
     </main>
 </body>
