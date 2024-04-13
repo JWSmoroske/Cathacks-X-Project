@@ -81,7 +81,7 @@ main{
     border-radius: 35px;
     background-color: #fefefe;
     margin: 15% auto;
-    font-size: var(--MEDIUM-FS);
+    font-size: var(--FS);
     /* 15% from the top and centered */
     padding: 20px;
     border: 5px solid #888;
