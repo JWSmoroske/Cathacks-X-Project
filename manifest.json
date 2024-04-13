@@ -1,0 +1,10 @@
+{
+    "name": "Medication Tracker",
+    "short_name": "MedTracker",
+    "theme_color": "#333333",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "orientation": "portrait",
+    "scope": "/",
+    "start_url": "/"
+  }
