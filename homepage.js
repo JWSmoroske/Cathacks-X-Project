@@ -60,12 +60,13 @@ function update(){
         let medicat = meds[key];
         const newListItem = document.createElement("div");
         newListItem.innerHTML = "";
-        const newListName = document.createElement("div");
-        const newListDosage = document.createElement("div");
-        const newListQuantity = document.createElement("div");
+        const newListName = document.createElement("span");
+        const newListDosage = document.createElement("span");
+        const newBreak = document.createElement("br");
+        const newListQuantity = document.createElement("span");
         const newListFrequency = document.createElement("div");
         const newListScientific = document.createElement("div");
-        const newListMethod = document.createElement("div");
+        const newListMethod = document.createElement("span");
         
         let name = medicat["name"];
         let dosage = medicat["dosage"];
@@ -90,12 +91,14 @@ function update(){
         newButton.addEventListener("click", function(){
             deleteItem(name);
         });
+        newButton.innerHTML = '<img width=\"20px\"src=\"./images/icons/trash.svg\"></img>';
         listDiv.appendChild(newListItem);
-        listDiv.appendChild(newListName);
-        listDiv.appendChild(newListDosage);
-        listDiv.appendChild(newListScientific);
-        listDiv.appendChild(newListMethod);
-        listDiv.appendChild(newButton);
+        newListItem.appendChild(newListName);
+        newListName.appendChild(newListDosage);
+        newListItem.appendChild(newListScientific);
+        newListScientific.appendChild(newBreak);
+        newListItem.appendChild(newListMethod);
+        newListMethod.appendChild(newButton);
         localStorage.setItem("medList", JSON.stringify(meds));
     }   
 }
