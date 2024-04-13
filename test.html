@@ -33,53 +33,65 @@
 
 <h2>Dropdown Menu with Search</h2>
 
-<!-- Search input -->
-<!-- <input type="text" id="searchInput" onkeyup="filterOptions()" placeholder="Search for options.."> -->
-<input type="text" id="searchInput" onclick="toggleDropdown()" onkeyup="filterOptions()"" placeholder="Search for options..">
-
 <!-- Dropdown menu -->
-<div id="myDropdown">
-  <div onclick="selectOption(this)">Drug 1</div>
-  <div onclick="selectOption(this)">Drug 2</div>
-</div>
+<select id="myDropdown">
+</select>
 
 <script>
 
-function toggleDropdown() {
-    var dropdown = document.getElementById("myDropDown");
-    if (dropdown.style.display === "block") {
-        dropdown.style.display = "none";
-    } else {
-        dropdown.style.display = "block";
-    }
+function fetchDataAndCreateList() {
+    let apiData = []; // Initialize an empty array to store the data
+
+    // Make API call and process the results
+    return fetch('https://api.fda.gov/drug/event.json?count=patient.drug.openfda.generic_name.exact')
+        .then((response) => response.json()) // Parse JSON response
+        .then((data) => {
+            apiData = data; // Assign response data to apiData
+            console.log(apiData); // Use apiData here or call functions that depend on it
+
+            // Extract the "term" values from apiData.results
+            const termArray = apiData.results.map(item => item.term);
+            console.log(termArray); // Log the termArray for verification
+
+            // Create and return a list using the "term" values
+            return createList(termArray);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            throw error; // Re-throw the error to propagate it to the caller
+        });
 }
 
-// Function to filter options based on search input
-function filterOptions() {
-    var input, filter, dropdown, options, i;
-    input = document.getElementById("searchInput");
-    filter = input.value.toUpperCase();
-    dropdown = document.getElementById("myDropdown");
-    options = dropdown.getElementsByTagName("div");
-    
-    // Loop through all dropdown items, and hide those that don't match the search query
-    for (i = 0; i < options.length; i++) {
-        if (options[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
-            options[i].style.display = "";
-        } else {
-            options[i].style.display = "none";
-        }
-    }
-    
-    // Display the dropdown
-    dropdown.style.display = "block";
+// Function to create a list using the provided array of items
+function createList(items) {
+    const list = document.createElement('ul'); // Create <ul> element
+    items.forEach(item => {
+        const listItem = document.createElement('li'); // Create <li> element
+        listItem.textContent = item; // Set text content of <li> to the item
+        list.appendChild(listItem); // Append <li> to <ul>
+    });
+    return list; // Return the created list
 }
 
-// Function to select an option
-function selectOption(option) {
-    document.getElementById("searchInput").value = option.innerHTML;
-    document.getElementById("myDropdown").style.display = "none";
-}
+fetchDataAndCreateList()
+    .then((list) => {
+        console.log("is list an array? ", typeof list)
+        const dropdownContainer = document.getElementById("myDropdown");
+
+        const liElements = list.querySelectorAll('li');
+        liElements.forEach(li => {
+            // Create an option element for each item
+            const option = document.createElement('option');
+
+            // Set the text of the option to the item
+            option.textContent = li.textContent;
+            option.value = li.textContent;
+            // Append the option to the dropdown
+            dropdownContainer.appendChild(option);
+        })
+
+    });
+
 </script>
 
 </body>
