@@ -1,5 +1,5 @@
-// let meds = localStorage.getItem('medList');
-
+let meds = JSON.parse(localStorage.getItem('medList'));
+/*
 const sample_med = {
     "name": "ASPIRIN",
     "dosage": "25mg",
@@ -21,7 +21,7 @@ const sample_med2 = {
 let meds = {}; 
 meds[sample_med.name] = sample_med;
 meds[sample_med2.name] = sample_med2;
-
+*/
 
 async function load() {
     let allTimes = [];
@@ -46,14 +46,19 @@ async function load() {
         }
     }
     allTimes.sort((a, b) => (a-b));
-    console.log(allTimes);
     for (let i = 0; i < allTimes.length; i++) {
-        console.log("point reached");
         document.getElementById('timeList').innerHTML += `<li> <h3> ${timeOut(allTimes[i])} </h3> <ul class=\"instructionList\"> ${timeToHTML.get(allTimes[i])} </ul> </li>`;
     }
 }
 
-load();
+if (Object.keys(meds).length == 0) {
+    document.getElementById('empty').style.marginTop = '20px';
+    document.getElementById('empty').innerHTML = "Visit the home page to add perscriptions!";
+} else {
+    document.getElementById('empty').style.marginTop = '0px';
+    document.getElementById('empty').innerHTML = "";
+    load();
+}
 
 
 function parseTime(str) {
