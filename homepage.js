@@ -184,3 +184,7 @@ async function getSciName(name) {
         return data.results[0].term;
     });
 }
+
+if("serviceWorker" in navigator) {
+    navigator.serviceWorker.register('/sw.js', { scope: '/Cathacks-X-Project/' });
+  }
