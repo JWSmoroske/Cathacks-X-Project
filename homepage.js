@@ -42,7 +42,7 @@ function closeButton(){
     modal.style.display = "none";
 }
 
-function update(){
+async function update(){
     console.log(Object.keys(meds).length);
     let listDiv = document.getElementById("listContainer");
     listDiv.innerHTML = "";
@@ -71,7 +71,8 @@ function update(){
         newListName.classList.add("medListName");
         newListDosage.textContent = "Dosage: "+dosage;
         newListDosage.classList.add("medListDosage");
-        newListScientific.textContent = "Scientific Name: " + dosage;
+        let sciName = await getSciName(name);
+        newListScientific.textContent = "Scientific Name: " + sciName;
         newListScientific.classList.add("medListScientific");
         newListMethod.textContent = "Method: " + method;
         newListMethod.classList.add("medListMethod");
@@ -147,3 +148,10 @@ window.onclick = function (event) {
     }
 }
 
+async function getSciName(name) {
+    return fetch(`https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name:"${name}"&count=patient.drug.openfda.substance_name.exact&limit=1`)
+    .then((response) => response.json())
+    .then((data) => {
+        return data.results[0].term;
+    });
+}
