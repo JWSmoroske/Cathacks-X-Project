@@ -54,13 +54,19 @@ function closeButton(){
 
 function update(){
     console.log(Object.keys(meds).length);
-    if(!localStorage.getItem("medList")) return;
-    meds = JSON.parse(localStorage.getItem("medList"));
     let listDiv = document.getElementById("listContainer");
     listDiv.innerHTML = "";
     for(const key in meds){
         let medicat = meds[key];
         const newListItem = document.createElement("div");
+        newListItem.innerHTML = "";
+        const newListName = document.createElement("div");
+        const newListDosage = document.createElement("div");
+        const newListQuantity = document.createElement("div");
+        const newListFrequency = document.createElement("div");
+        const newListScientific = document.createElement("div");
+        const newListMethod = document.createElement("div");
+        
         let name = medicat["name"];
         let dosage = medicat["dosage"];
         let quantity = medicat["quantity"];
@@ -68,7 +74,16 @@ function update(){
         let start = medicat["start_time"];
         let end = medicat["end_time"];
         let method = medicat["method"];
-        newListItem.textContent = "Name: "+name+ " Dosage: "+dosage;
+        // newListItem.textContent = "Name: "+name+ " Dosage: "+dosage+"Scientific Name: "+"Use case: ";
+        newListItem.classList.add("medListItems");
+        newListName.textContent = "Name: "+name;
+        newListName.classList.add("medListName");
+        newListDosage.textContent = "Dosage: "+dosage;
+        newListDosage.classList.add("medListDosage");
+        newListScientific.textContent = "Scientific Name: " + dosage;
+        newListScientific.classList.add("medListScientific");
+        newListMethod.textContent = "Method: " + method;
+        newListMethod.classList.add("medListMethod");
         const newButton = document.createElement("button");
         newButton.classList.add("deleteButton");
         newButton.textContent = "Delete";
@@ -76,6 +91,10 @@ function update(){
             deleteItem(name);
         });
         listDiv.appendChild(newListItem);
+        listDiv.appendChild(newListName);
+        listDiv.appendChild(newListDosage);
+        listDiv.appendChild(newListScientific);
+        listDiv.appendChild(newListMethod);
         listDiv.appendChild(newButton);
         localStorage.setItem("medList", JSON.stringify(meds));
     }   

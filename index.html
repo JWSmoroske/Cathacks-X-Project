@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="homepage.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <script src="app.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script src="homepage.js" defer></script>
     <title>Home</title>
 </head>
 
@@ -16,55 +17,129 @@
     <header>
         <table class="headTable">
             <tr>
-                <td><a href="./index.html"><img src="./images/icons/home.svg" alt="Home" width = "35" height = "35"></a></td>
-                <td><a href="./side_effects.html"><img src="./images/icons/pill.svg" alt="Medications" width = "35" height = "35"></a></td>
-                <td><a href="./schedule.html"><img src="./images/icons/clock.svg" alt="Clock" width = "35" height = "35"></a></td>
-                <td class="callDoc"><a href="tel:+15025541822"><img src="images/icons/heart.svg" alt="Doctor" height = "35" width = "35"></a></td>
+                <td><a href="./index.html"><img src="./images/icons/home.svg" alt="Home" width="35" height="35"></a>
+                </td>
+                <td><a href="./side_effects.html"><img src="./images/icons/pill.svg" alt="Medications" width="35"
+                            height="35"></a></td>
+                <td><a href="./schedule.html"><img src="./images/icons/clock.svg" alt="Clock" width="35"
+                            height="35"></a></td>
+                <td class="callDoc"><a href="tel:+15025541822"><img src="images/icons/heart.svg" alt="Doctor"
+                            height="35" width="35"></a></td>
             </tr>
         </table>
     </header>
     <main>
-        <button id="myBtn">Open Modal</button>
-        
+
         <!-- The Modal -->
         <div id="myModal" class="modal">
             <div class="modal-content">
-            <!-- Modal content -->
-            <h1>Prescription Information</h1>
+                <!-- Modal content -->
+                <h1 class="modalHeader">Prescription Information</h1>
+                <form id="medication-form" class="form">
+                    <span>
+                        <label for="medicationInput">Medication Name:</label>
+                        <input type="text" id="medicationInput" placeholder="Ibuprofen"><br>
+                    </span>
 
-            <form id="medication-form">
-                <label for="medicationInput">Medication Name:</label>
-                <input type="text" id="medicationInput" placeholder="Ibuprofen"><br>
-                
-                <label for="dosageInput">Dosage:</label>
-                <input type="text" id="dosageInput" placeholder="50mg"><br>
+                    <span>
+                        <label for="dosageInput">Dosage:</label>
+                        <input type="text" id="dosageInput" placeholder="50mg"><br>
+                    </span>
 
-                <label for="quantityInput">Quantity:</label>
-                <input type="text" id="quantityInput" placeholder="3"><br>
-                
-                <label for="frequencyInput">Frequency:</label>
-                <input type="text" id="frequencyInput" placeholder="2"><br>
+                    <span>
+                        <label for="quantityInput">Quantity:</label>
+                        <input type="text" id="quantityInput" placeholder="3"><br>
+                    </span>
 
-                <label for="startInput">Start Time:</label>
-                <input type="text" id="startInput" placeholder="8am"><br>
-                
-                <label for="endInput">End Time:</label>
-                <input type="text" id="endInput" placeholder="8pm"><br>
-                
-                <label for="methodInput">Method:</label>
-                <input type="text" id="methodInput" placeholder="oral"><br>
 
-                <button type="button" id="addItem('add')" onclick="addItem()" data-dismiss="modal">Add Medication</button>
-                <button onclick="closeButton()" type="button" class="close-button" data-dismiss="modal">Close</button>
+                    <span>
+                        <label for="frequencyInput">Frequency:</label>
+                        <input type="text" id="frequencyInput" placeholder="2"><br>
+                    </span>
+
+                    <span>
+                        <label for="startInput">Start Time:</label>
+                        <input autocomplete = "off" onclick=event.stopPropagation() type="text" id="startInput" list="startList" placeholder="8am">
+                        <datalist id = "startList">
+                            <option value="12am">12am</option>
+                            <option value="1am">1am</option>
+                            <option value="2am">2am</option>
+                            <option value="3am">3am</option>
+                            <option value="4am">4am</option>
+                            <option value="5am">5am</option>
+                            <option value="6am">6am</option>
+                            <option value="7am">7am</option>
+                            <option value="8am">8am</option>
+                            <option value="9am">9am</option>
+                            <option value="10am">10am</option>
+                            <option value="11am">11am</option>
+                            <option value="12pm">12pm</option>
+                            <option value="1pm">1pm</option>
+                            <option value="2pm">2pm</option>
+                            <option value="3pm">3pm</option>
+                            <option value="4pm">4pm</option>
+                            <option value="5pm">5pm</option>
+                            <option value="6pm">6pm</option>
+                            <option value="7pm">7pm</option>
+                            <option value="8pm">8pm</option>
+                            <option value="9pm">9pm</option>
+                            <option value="10pm">10pm</option>
+                            <option value="11pm">11pm</option>
+                        </datalist>
+                    </span>
+
+                    <span>
+                        <label for="endInput">End Time:</label>
+                        <input list="endList"type="text" id="endInput" placeholder="8pm"><br>
+                        <datalist id="endList">
+                            <option value="12am">12am</option>
+                            <option value="1am">1am</option>
+                            <option value="2am">2am</option>
+                            <option value="3am">3am</option>
+                            <option value="4am">4am</option>
+                            <option value="5am">5am</option>
+                            <option value="6am">6am</option>
+                            <option value="7am">7am</option>
+                            <option value="8am">8am</option>
+                            <option value="9am">9am</option>
+                            <option value="10am">10am</option>
+                            <option value="11am">11am</option>
+                            <option value="12pm">12pm</option>
+                            <option value="1pm">1pm</option>
+                            <option value="2pm">2pm</option>
+                            <option value="3pm">3pm</option>
+                            <option value="4pm">4pm</option>
+                            <option value="5pm">5pm</option>
+                            <option value="6pm">6pm</option>
+                            <option value="7pm">7pm</option>
+                            <option value="8pm">8pm</option>
+                            <option value="9pm">9pm</option>
+                            <option value="10pm">10pm</option>
+                            <option value="11pm">11pm</option>
+                        </datalist>
+                    </span>
+
+                    <span>
+                        <label for="methodInput">Method:</label>
+                        <input type="text" id="methodInput" placeholder="with water"><br>
+                    </span>
+                    <span>
+                        <button type="button" id="addItem('add')" onclick="addItem()" data-dismiss="modal">Add
+                            Medication</button>
+                        <button onclick="closeButton()" type="button" class="close-button"
+                            data-dismiss="modal">Close</button>
+                    </span>
             </div>
-            </div>
-            </form>
+        </div>
+        </form>
         <br>
         </div>
-        <h2>Medication List:</h2>
-        <div id="listContainer" onload="update()">
-
+        <h2 class="medicationHeader">Medication List:</h2>
+        <div class="medListAdder" style = "width: 100%;height: 350px;" class="medicationList" id="listContainer" onload="update()">
+        
         </div>
+        </div>
+        <button id="myBtn">+</button>
     </main>
 </body>
 
