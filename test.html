@@ -1,4 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search for Desired Drug</title>
+    <style>
+        /* Style for the dropdown menu */
+        #myDropdown {
+            display: inline;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
 
+        /* Style for dropdown items */
+        #myDropdown div {
+            padding: 12px 16px;
+            cursor: pointer;
+        }
+
+        /* Style for the search input */
+        #searchInput {
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Dropdown Menu with Search</h2>
+
+<!-- Search input -->
+<!-- <input type="text" id="searchInput" onkeyup="filterOptions()" placeholder="Search for options.."> -->
+<input type="text" id="searchInput" onclick="toggleDropdown()" onkeyup="filterOptions()"" placeholder="Search for options..">
+
+<!-- Dropdown menu -->
+<div id="myDropdown">
+  <div onclick="selectOption(this)">Drug 1</div>
+  <div onclick="selectOption(this)">Drug 2</div>
+</div>
+
+<script>
+
+function toggleDropdown() {
+    var dropdown = document.getElementById("myDropDown");
+    if (dropdown.style.display === "block") {
+        dropdown.style.display = "none";
+    } else {
+        dropdown.style.display = "block";
+    }
+}
+
+// Function to filter options based on search input
+function filterOptions() {
+    var input, filter, dropdown, options, i;
+    input = document.getElementById("searchInput");
+    filter = input.value.toUpperCase();
+    dropdown = document.getElementById("myDropdown");
+    options = dropdown.getElementsByTagName("div");
+    
+    // Loop through all dropdown items, and hide those that don't match the search query
+    for (i = 0; i < options.length; i++) {
+        if (options[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+            options[i].style.display = "";
+        } else {
+            options[i].style.display = "none";
+        }
+    }
+    
+    // Display the dropdown
+    dropdown.style.display = "block";
+}
+
+// Function to select an option
+function selectOption(option) {
+    document.getElementById("searchInput").value = option.innerHTML;
+    document.getElementById("myDropdown").style.display = "none";
+}
+</script>
+
+</body>
 </html>
