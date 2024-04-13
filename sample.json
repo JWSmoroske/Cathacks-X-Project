@@ -1,0 +1,8 @@
+{
+    "name": "Ibuprofen",
+    "dosage": "25mg",
+    "quantity": 1,
+    "frequency": 6,
+    "start_time": "7:00am",
+    "end_time": "9:00pm"
+}
