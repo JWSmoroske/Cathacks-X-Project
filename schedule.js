@@ -51,6 +51,7 @@ async function load() {
     }
 }
 
+// different outputs if no perscriptions entered
 if (Object.keys(meds).length == 0) {
     document.getElementById('empty').style.marginTop = '20px';
     document.getElementById('empty').innerHTML = "Visit the home page to add perscriptions!";
