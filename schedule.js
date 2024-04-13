@@ -22,35 +22,38 @@ let meds = {};
 meds[sample_med.name] = sample_med;
 meds[sample_med2.name] = sample_med2;
 
-let allTimes = [];
-let timeToHTML = new Map();
 
-for (const key in meds) {
-    let route = "oral"; // get from API fetch
-    let str = `<li> Take ${key} (${meds[key].quantity} @ ${meds[key].dosage}) ${route}ly ${meds[key].method} </li>`;
-    let start = parseTime(meds[key].start_time), end = parseTime(meds[key].end_time);
-    let curTime = start;
-    while (curTime < end) {
-        if (timeToHTML.has(curTime))
-        {
-            timeToHTML.set(curTime, timeToHTML.get(curTime) + str);
+async function load() {
+    let allTimes = [];
+    let timeToHTML = new Map();
+
+    for (const key in meds) {
+        let route = await getRoute(key);
+        let str = `<li> Take ${key} (${meds[key].quantity} @ ${meds[key].dosage}) ${route}ly ${meds[key].method} </li>`;
+        let start = parseTime(meds[key].start_time), end = parseTime(meds[key].end_time);
+        let curTime = start;
+        while (curTime < end) {
+            if (timeToHTML.has(curTime))
+            {
+                timeToHTML.set(curTime, timeToHTML.get(curTime) + str);
+            }
+            else
+            {
+                timeToHTML.set(curTime, str);
+                allTimes.push(curTime);
+            }
+            curTime += meds[key].frequency;
         }
-        else
-        {
-            timeToHTML.set(curTime, str);
-            allTimes.push(curTime);
-        }
-        curTime += meds[key].frequency;
     }
     allTimes.sort((a, b) => (a-b));
     console.log(allTimes);
-    console.log(timeToHTML);
+    for (let i = 0; i < allTimes.length; i++) {
+        console.log("point reached");
+        document.getElementById('timeList').innerHTML += `<li> <h3> ${timeOut(allTimes[i])} </h3> <ul class=\"instructionList\"> ${timeToHTML.get(allTimes[i])} </ul> </li>`;
+    }
 }
 
-for (let i = 0; i < allTimes.length; i++)
-{
-    document.getElementById('timeList').innerHTML += `<li> <h3> ${timeOut(allTimes[i])} </h3> <ul class=\"instructionList\"> ${timeToHTML.get(allTimes[i])} </ul> </li>`;
-}
+load();
 
 
 function parseTime(str) {
@@ -78,4 +81,11 @@ function timeOut(num) {
     if (num == 12) return "12:00 PM";
     if (num < 12) return (num) + ":00 AM";
     return (num-12) + ":00 PM";
+}
+async function getRoute(name) {
+    return fetch(`https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name:"${name}"&count=patient.drug.openfda.route.exact`)
+    .then((response) => response.json())
+    .then((data) => {
+        return data.results[0].term.toLowerCase();
+    });
 }
