@@ -184,3 +184,10 @@ async function getSciName(name) {
         return data.results[0].term;
     });
 }
+
+if (navigator.serviceWorker) {
+    navigator.serviceWorker.register (
+      '/Cathacks-X-Project/sw.js',
+      {scope: '/Cathacks-X-Project/'}
+    )
+  }
