@@ -28,3 +28,17 @@ body {
     background-color: var(--LIGHT-COLOR);
     color: var(--DARK-COLOR);
 }
+
+ul{
+    list-style-type: none;
+}
+
+header ul{
+    margin: 1rem 0.5rem 1rem 0;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+header a{
+    text-decoration: none;
+}
