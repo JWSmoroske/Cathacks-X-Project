@@ -1,4 +1,4 @@
-var GHPATH = '/Cathacks-X-Project';
+var GHPATH = '';
 var APP_PREFIX = 'cxmt_';
 var VERSION = 'version_001';
 var URLS = [    
