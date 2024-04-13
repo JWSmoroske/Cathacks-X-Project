@@ -1,57 +1,43 @@
-var GHPATH = '/Cathacks-X-Project';
-var APP_PREFIX = 'cxmt_';
-var VERSION = 'version_001';
-var URLS = [    
-  `${GHPATH}/`,
-  `${GHPATH}/index.html`,
-  `${GHPATH}/homepage.css`,
-  `${GHPATH}/homepage.js`,
-  `${GHPATH}/schedule.html`,
-  `${GHPATH}/schedule.css`,
-  `${GHPATH}/schedule.js`,
-  `${GHPATH}/side_effects.html`,
-  `${GHPATH}/side_effects.css`,
-  `${GHPATH}/side_effects.js`
-]
+const CACHE_NAME = `medication-tracker-v1`;
 
-var CACHE_NAME = APP_PREFIX + VERSION
-self.addEventListener('fetch', function (e) {
-  console.log('Fetch request : ' + e.request.url);
-  e.respondWith(
-    caches.match(e.request).then(function (request) {
-      if (request) { 
-        console.log('Responding with cache : ' + e.request.url);
-        return request
-      } else {       
-        console.log('File is not cached, fetching : ' + e.request.url);
-        return fetch(e.request)
-      }
-    })
-  )
-})
+// Use the install event to pre-cache all initial resources.
+self.addEventListener('install', event => {
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE_NAME);
+    cache.addAll([
+      '/',
+      '/index.html',
+      '/homepage.js',
+      '/homepage.css',
+      '/schedule.html',
+      '/schedule.css',
+      '/schedule.js',
+      '/side-effects.html',
+      '/side-effects.css',
+      '/side-effects.js',
+    ]);
+  })());
+});
 
-self.addEventListener('install', function (e) {
-  e.waitUntil(
-    caches.open(CACHE_NAME).then(function (cache) {
-      console.log('Installing cache : ' + CACHE_NAME);
-      return cache.addAll(URLS)
-    })
-  )
-})
+self.addEventListener('fetch', event => {
+  event.respondWith((async () => {
+    const cache = await caches.open(CACHE_NAME);
 
-self.addEventListener('activate', function (e) {
-  e.waitUntil(
-    caches.keys().then(function (keyList) {
-      var cacheWhitelist = keyList.filter(function (key) {
-        return key.indexOf(APP_PREFIX)
-      })
-      cacheWhitelist.push(CACHE_NAME);
-      return Promise.all(keyList.map(function (key, i) {
-        if (cacheWhitelist.indexOf(key) === -1) {
-          console.log('Deleting cache : ' + keyList[i] );
-          return caches.delete(keyList[i])
+    // Get the resource from the cache.
+    const cachedResponse = await cache.match(event.request);
+    if (cachedResponse) {
+      return cachedResponse;
+    } else {
+        try {
+          // If the resource was not in the cache, try the network.
+          const fetchResponse = await fetch(event.request);
+
+          // Save the resource in the cache and return it.
+          cache.put(event.request, fetchResponse.clone());
+          return fetchResponse;
+        } catch (e) {
+          // The network failed.
         }
-      }))
-    })
-  )
-})
+    }
+  })());
+});

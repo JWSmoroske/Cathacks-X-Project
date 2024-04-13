@@ -185,9 +185,6 @@ async function getSciName(name) {
     });
 }
 
-if (navigator.serviceWorker) {
-    navigator.serviceWorker.register (
-      '/Cathacks-X-Project/sw.js',
-      {scope: '/Cathacks-X-Project/'}
-    )
+if("serviceWorker" in navigator) {
+    navigator.serviceWorker.register('/sw.js', { scope: '/Cathacks-X-Project/' });
   }
