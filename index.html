@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="homepage.css">
+    <script src="app.js"></script>
     <title>Home</title>
 </head>
 
@@ -17,8 +18,18 @@
             <li><a href="tel:+15025541822"><img src="images/icons/heart.svg" alt="Doctor" height = "35" width = "35"></a></li>
         </ul>
     </header>
-    
-    <main>Starting out</main>
+    <main>
+        <div class = "container">
+            <h1>List of medications taking:</h1>
+            <input type="text" id="itemInput" placeholder="Enter item">
+            <button onclick="addItem('add')">Add Item</button>
+            <select id="medicationSelect">
+            </select>
+            <button id="removeItemButton" onclick="removeItem()">Remove Item</button>
+            <ul id="itemList">
+            </ul>
+        </div>
+    </main>
 </body>
 
 </html>
