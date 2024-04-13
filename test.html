@@ -33,10 +33,6 @@
 
 <h2>Dropdown Menu with Search</h2>
 
-<!-- Search input -->
-<!-- <input type="text" id="searchInput" onkeyup="filterOptions()" placeholder="Search for options.."> -->
-<input type="text" id="searchInput" onkeyup="filterOptions()"" placeholder="Search for options..">
-
 <!-- Dropdown menu -->
 <select id="myDropdown">
 </select>
@@ -96,43 +92,6 @@ fetchDataAndCreateList()
 
     });
 
-
-
-function toggleDropdown() {
-    var dropdown = document.getElementById("myDropDown");
-    if (dropdown.style.display === "block") {
-        dropdown.style.display = "none";
-    } else {
-        dropdown.style.display = "block";
-    }
-}
-
-// Function to filter options based on search input
-function filterOptions() {
-    var input, filter, dropdown, options, i;
-    input = document.getElementById("searchInput");
-    filter = input.value.toUpperCase();
-    dropdown = document.getElementById("myDropdown");
-    options = dropdown.getElementsByTagName("div");
-    
-    // Loop through all dropdown items, and hide those that don't match the search query
-    for (i = 0; i < options.length; i++) {
-        if (options[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
-            options[i].style.display = "";
-        } else {
-            options[i].style.display = "none";
-        }
-    }
-    
-    // Display the dropdown
-    dropdown.style.display = "block";
-}
-
-// Function to select an option
-function selectOption(option) {
-    document.getElementById("searchInput").value = option.innerHTML;
-    document.getElementById("myDropdown").style.display = "none";
-}
 </script>
 
 </body>
