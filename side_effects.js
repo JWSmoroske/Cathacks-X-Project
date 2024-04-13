@@ -23,16 +23,26 @@ let meds = {};
 meds[sample_med.name] = sample_med;
 meds[sample_med2.name] = sample_med2;
 
-const table = document.getElementById('effectsTable');
+let table = document.getElementById('effectsTable');
+let effMap = new Map();
+let curRow = 0;
 
 for (const key in meds) {
-    fetch(`https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name:"${meds[key].name}"&count=patient.reaction.reactionmeddrapt.exact`)
+    fetch(`https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name:"${key}"&count=patient.reaction.reactionmeddrapt.exact`)
     .then((response) => response.json())
     .then((data) => {
         // console.log(data);
         for (let i = 0; i < data.results.length && i < EFFECTS_PER; i++) {
             let term = data.results[i].term;
-            console.log(term);
+            if (effMap.has(term)) {
+                // console.log(`already has term ${term}`);
+                document.getElementById(`row${effMap.get(term)}drug`).innerHTML += `, ${key}`;
+            }
+            else {
+                effMap.set(term, ++curRow);
+                // console.log(`adding term ${term}`);
+                table.innerHTML += `<tr> <td id=row${curRow}term> ${term} </td> <td id=row${curRow}drug> ${key} </td> </tr>`;
+            }
         }
     });
 }

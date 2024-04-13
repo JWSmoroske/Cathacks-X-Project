@@ -59,9 +59,17 @@ td {
 .effectTable {
     font-family: 'Montserrat';
     width: 100%;
-    border: 1px solid black;
+    border: 0px solid black;
+    border-collapse: collapse;
+    border-style: hidden;
     text-align: center;
     table-layout: fixed;
     word-wrap: break-word;
+    border-spacing: 10px;
+}
+
+.effectTable td {
+    border: 3px solid black;
+    padding: 4px;
 }
   
