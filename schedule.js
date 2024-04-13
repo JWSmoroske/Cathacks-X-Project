@@ -32,7 +32,7 @@ async function load() {
         let str = `<li> Take ${key} (${meds[key].quantity} @ ${meds[key].dosage}) ${route}ly ${meds[key].method} </li>`;
         let start = parseTime(meds[key].start_time), end = parseTime(meds[key].end_time);
         let curTime = start;
-        while (curTime < end) {
+        while (curTime <= end) {
             if (timeToHTML.has(curTime))
             {
                 timeToHTML.set(curTime, timeToHTML.get(curTime) + str);
