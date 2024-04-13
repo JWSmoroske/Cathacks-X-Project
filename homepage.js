@@ -102,28 +102,57 @@ function deleteItem(name){
     update();
 }
 
-function removeItem() {
-    const medicationSelect = document.getElementById("medicationSelect");
-    const itemList = document.getElementById("itemList");
+function fetchDataAndCreateList() {
+    let apiData = []; // Initialize an empty array to store the data
 
-    const selectedMedication = medicationSelect.value;
+    // Make API call and process the results
+    return fetch('https://api.fda.gov/drug/event.json?count=patient.drug.openfda.generic_name.exact')
+        .then((response) => response.json()) // Parse JSON response
+        .then((data) => {
+            apiData = data; // Assign response data to apiData
+            console.log(apiData); // Use apiData here or call functions that depend on it
 
-    // Find the list item corresponding to the selected medication
-    let itemToRemove = null;
-    for (const item of itemList.children) {
-        if (item.textContent === selectedMedication) {
-            itemToRemove = item;
-            break;
-        }
-    }
+            // Extract the "term" values from apiData.results
+            const termArray = apiData.results.map(item => item.term);
+            console.log(termArray); // Log the termArray for verification
 
-    if (itemToRemove) {
-        itemList.removeChild(itemToRemove);
-        medicationSelect.removeChild(medicationSelect.selectedOptions[0]); // Remove the selected option
-    } else {
-        console.log("Medication not found in the list");
-    }
+            // Create and return a list using the "term" values
+            return createList(termArray);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            throw error; // Re-throw the error to propagate it to the caller
+        });
 }
+
+// Function to create a list using the provided array of items
+function createList(items) {
+    const list = document.createElement('ul'); // Create <ul> element
+    items.forEach(item => {
+        const listItem = document.createElement('li'); // Create <li> element
+        listItem.textContent = item; // Set text content of <li> to the item
+        list.appendChild(listItem); // Append <li> to <ul>
+    });
+    return list; // Return the created list
+}
+
+fetchDataAndCreateList()
+    .then((list) => {
+        console.log("is list an array? ", typeof list)
+        const dropdownContainer = document.getElementById("medicationInput");
+
+        const liElements = list.querySelectorAll('li');
+        liElements.forEach(li => {
+            // Create an option element for each item
+            const option = document.createElement('option');
+
+            // Set the text of the option to the item
+            option.textContent = li.textContent;
+            option.value = li.textContent;
+            // Append the option to the dropdown
+            dropdownContainer.appendChild(option);
+        })
+    });
 
 // Get the modal
 var modal = document.getElementById("myModal");
