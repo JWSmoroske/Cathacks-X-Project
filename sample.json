@@ -4,5 +4,6 @@
     "quantity": 1,
     "frequency": 6,
     "start_time": "7:00am",
-    "end_time": "9:00pm"
+    "end_time": "9:00pm",
+    "method": "with water"
 }
