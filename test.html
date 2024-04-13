@@ -45,6 +45,51 @@
 
 <script>
 
+function fetchDataAndCreateList() {
+    let apiData = []; // Initialize an empty array to store the data
+
+    // Make API call and process the results
+    return fetch('https://api.fda.gov/drug/event.json?count=patient.drug.openfda.generic_name.exact')
+        .then((response) => response.json()) // Parse JSON response
+        .then((data) => {
+            apiData = data; // Assign response data to apiData
+            console.log(apiData); // Use apiData here or call functions that depend on it
+
+            // Extract the "term" values from apiData.results
+            const termArray = apiData.results.map(item => item.term);
+            console.log(termArray); // Log the termArray for verification
+
+            // Create and return a list using the "term" values
+            return createList(termArray);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            throw error; // Re-throw the error to propagate it to the caller
+        });
+}
+
+// Function to create a list using the provided array of items
+function createList(items) {
+    const list = document.createElement('ul'); // Create <ul> element
+    items.forEach(item => {
+        const listItem = document.createElement('li'); // Create <li> element
+        listItem.textContent = item; // Set text content of <li> to the item
+        list.appendChild(listItem); // Append <li> to <ul>
+    });
+    return list; // Return the created list
+}
+
+// Call the function to fetch data and create the list
+fetchDataAndCreateList()
+    .then((list) => {
+        // Append the list to a container in the DOM
+        document.body.appendChild(list);
+    })
+    .catch(error => {
+        // Handle errors
+    });
+
+
 function toggleDropdown() {
     var dropdown = document.getElementById("myDropDown");
     if (dropdown.style.display === "block") {
