@@ -5,9 +5,9 @@ Our app takes in user prescription information and allows the user to easily tra
 ## How we built it
 We used HTML, CSS, JavaScript, Open FDA API, GitHub, and Netlify to consolidate practical, useful information that can be easily accessed through mobile or desktop applications.
 ## Challenges we ran into
-Initially, we hadn't used GitHub before and struggled to manage the version control that GitHub has to offer. The complex built in JavaScript functions were also difficult to manage to produce information in the way we intended. We each had little experience using APIs and had trouble integrating the information that the API had to offer. We also had never created a PWA before and had to maneuver through the process of building one.
+The complex built in JavaScript functions were also difficult to manage to produce information in the way we intended. We also had never created a PWA before and had to maneuver through the process of building one.
 ## Accomplishments that we're proud of
-Learning JavaScript, APIs, and PWAs. Overall just learning a LOT of new languages and tools.
+Learning JavaScript, APIs, and PWAs.
 ## What we learned
 Flexbox, GitHub version control, API queries and interpretation, and PWA deployment procedures.
 ## What's next for Medication Tracker App
